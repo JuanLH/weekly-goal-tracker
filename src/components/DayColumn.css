@@ -1,0 +1,162 @@
+.day-column {
+    background: white;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    min-height: 400px;
+    border-top: 4px solid #e0e0e0;
+    transition: border-color 0.3s;
+}
+
+.day-column.today {
+    border-top-color: #667eea;
+    background: linear-gradient(to bottom, rgba(102, 126, 234, 0.05) 0%, white 100%);
+}
+
+.day-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.day-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #333;
+    margin: 0;
+}
+
+.day-column.today .day-name {
+    color: #667eea;
+}
+
+.day-date {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #999;
+}
+
+.day-column.today .day-date {
+    color: #667eea;
+}
+
+.add-task-btn {
+    width: 100%;
+    padding: 8px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    margin-bottom: 12px;
+}
+
+.add-task-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.task-form {
+    background: #f9f9f9;
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.task-input,
+.goal-select {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid #e0e0e0;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+.task-input:focus,
+.goal-select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.task-input {
+    resize: vertical;
+}
+
+.goal-select {
+    background: white;
+    cursor: pointer;
+}
+
+.submit-task-btn {
+    background: #4caf50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.submit-task-btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(76, 175, 80, 0.3);
+}
+
+.tasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+}
+
+.no-tasks {
+    color: #999;
+    font-style: italic;
+    text-align: center;
+    padding: 20px;
+    margin: 0;
+}
+
+/* Print Styles */
+@media print {
+    .day-column {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        page-break-inside: avoid;
+        min-height: auto;
+    }
+
+    .day-column.today {
+        background: white;
+    }
+
+    .add-task-btn,
+    .task-form {
+        display: none;
+    }
+
+    .day-header {
+        border-bottom: 2px solid #333;
+    }
+
+    .day-name,
+    .day-date {
+        color: #333;
+    }
+}

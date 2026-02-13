@@ -1,0 +1,142 @@
+.weekly-planner-page {
+    width: 100%;
+    padding: 24px;
+}
+
+.planner-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.week-navigation {
+    display: flex;
+    gap: 12px;
+}
+
+.nav-btn,
+.today-btn {
+    padding: 10px 20px;
+    border: 2px solid #667eea;
+    background: white;
+    color: #667eea;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.nav-btn:hover,
+.today-btn:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.today-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+}
+
+.week-title {
+    font-size: 1.75rem;
+    margin: 0;
+    color: #333;
+    flex: 1;
+    text-align: center;
+}
+
+.print-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.print-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.no-goals-warning {
+    background: #fff3cd;
+    border: 2px solid #ffc107;
+    border-radius: 12px;
+    padding: 32px;
+    text-align: center;
+    margin-top: 40px;
+}
+
+.no-goals-warning p {
+    font-size: 1.2rem;
+    color: #856404;
+    margin: 0;
+}
+
+/* Print Styles */
+@media print {
+    .weekly-planner-page {
+        padding: 0;
+    }
+
+    .planner-header {
+        margin-bottom: 16px;
+    }
+
+    .week-navigation,
+    .print-btn {
+        display: none;
+    }
+
+    .week-title {
+        font-size: 1.5rem;
+        text-align: left;
+    }
+}
+
+@media (max-width: 1024px) {
+    .planner-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .week-navigation {
+        justify-content: center;
+    }
+
+    .week-title {
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    .print-btn {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .week-navigation {
+        flex-direction: column;
+    }
+
+    .nav-btn,
+    .today-btn {
+        width: 100%;
+    }
+
+    .week-title {
+        font-size: 1.25rem;
+    }
+}
