@@ -1,5 +1,6 @@
 import type { Task, Goal } from '../types';
 import { WeeklyGrid } from '../components/WeeklyGrid';
+import { UnscheduledTaskList } from '../components/UnscheduledTaskList';
 import { getNextWeek, getPreviousWeek, formatDateShort } from '../utils/dateUtils';
 import './WeeklyPlannerPage.css';
 
@@ -41,6 +42,10 @@ export const WeeklyPlannerPage = ({
     const weekEnd = new Date(weekStart);
     weekEnd.setDate(weekStart.getDate() + 6);
 
+    // Filter tasks into scheduled and unscheduled
+    const scheduledTasks = tasks.filter(task => task.date);
+    const unscheduledTasks = tasks.filter(task => !task.date);
+
     return (
         <div className="weekly-planner-page">
             <div className="planner-header">
@@ -70,15 +75,29 @@ export const WeeklyPlannerPage = ({
                     <p>⚠️ Please add at least one yearly goal before creating tasks.</p>
                 </div>
             ) : (
-                <WeeklyGrid
-                    weekStart={weekStart}
-                    tasks={tasks}
-                    goals={goals}
-                    onAddTask={onAddTask}
-                    onEditTask={onEditTask}
-                    onDeleteTask={onDeleteTask}
-                    onToggleComplete={onToggleComplete}
-                />
+                <div className="planner-content">
+                    <aside className="sidebar no-print">
+                        <UnscheduledTaskList
+                            tasks={unscheduledTasks}
+                            goals={goals}
+                            onAddTask={onAddTask}
+                            onEditTask={onEditTask}
+                            onDeleteTask={onDeleteTask}
+                            onToggleComplete={onToggleComplete}
+                        />
+                    </aside>
+                    <div className="planner-main">
+                        <WeeklyGrid
+                            weekStart={weekStart}
+                            tasks={scheduledTasks}
+                            goals={goals}
+                            onAddTask={onAddTask}
+                            onEditTask={onEditTask}
+                            onDeleteTask={onDeleteTask}
+                            onToggleComplete={onToggleComplete}
+                        />
+                    </div>
+                </div>
             )}
         </div>
     );

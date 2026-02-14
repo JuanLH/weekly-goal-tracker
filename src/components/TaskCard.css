@@ -171,6 +171,16 @@
     box-shadow: 0 2px 8px rgba(244, 67, 54, 0.3);
 }
 
+/* Drag and Drop Styles */
+.task-card[draggable="true"] {
+    cursor: grab;
+}
+
+.task-card[draggable="true"]:active {
+    cursor: grabbing;
+    opacity: 0.5;
+}
+
 /* Print Styles */
 @media print {
     .task-card {

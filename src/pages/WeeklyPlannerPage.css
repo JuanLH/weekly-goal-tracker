@@ -140,3 +140,33 @@
         font-size: 1.25rem;
     }
 }
+
+/* Layout for sidebar and main content */
+.planner-content {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.sidebar {
+    width: 300px;
+    flex-shrink: 0;
+}
+
+.planner-main {
+    flex: 1;
+    min-width: 0;
+    /* Allows flex item to shrink below content size */
+}
+
+/* Responsive layout */
+@media (max-width: 1200px) {
+    .planner-content {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        width: 100%;
+        max-height: 400px;
+    }
+}

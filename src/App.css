@@ -1,19 +1,29 @@
 :root {
   --bg-primary: #f5f7fa;
   --bg-secondary: white;
+  --card-bg: white;
   --text-primary: #333;
   --text-secondary: #666;
   --border-color: #e0e0e0;
   --gradient-start: #667eea;
   --gradient-end: #764ba2;
+  --primary-color: #667eea;
+  --primary-hover: #5568d3;
+  --success-color: #10b981;
+  --success-hover: #059669;
 }
 
 [data-theme="dark"] {
   --bg-primary: #1a1a2e;
   --bg-secondary: #16213e;
+  --card-bg: #16213e;
   --text-primary: #eee;
   --text-secondary: #bbb;
   --border-color: #2a2a3e;
+  --primary-color: #667eea;
+  --primary-hover: #5568d3;
+  --success-color: #10b981;
+  --success-hover: #059669;
 }
 
 * {
@@ -49,7 +59,9 @@ body {
 [data-theme="dark"] .task-card,
 [data-theme="dark"] .day-column,
 [data-theme="dark"] .goal-form,
-[data-theme="dark"] .task-form {
+[data-theme="dark"] .task-form,
+[data-theme="dark"] .unscheduled-task-list,
+[data-theme="dark"] .add-task-form {
   background: var(--bg-secondary);
   color: var(--text-primary);
 }

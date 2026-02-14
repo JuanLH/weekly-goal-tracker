@@ -160,3 +160,24 @@
         color: #333;
     }
 }
+
+/* Drag and Drop Styles */
+.day-column.drag-over {
+    border-top-color: #4caf50;
+    background: linear-gradient(to bottom, rgba(76, 175, 80, 0.1) 0%, white 100%);
+    box-shadow: 0 4px 16px rgba(76, 175, 80, 0.3);
+}
+
+.day-column.drag-over .no-tasks {
+    color: #4caf50;
+    font-weight: 600;
+}
+
+/* Hide add task button on desktop (sidebar is available) */
+@media (min-width: 1200px) {
+
+    .add-task-btn,
+    .task-form {
+        display: none !important;
+    }
+}

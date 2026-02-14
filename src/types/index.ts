@@ -10,7 +10,7 @@ export interface Task {
     text: string;
     goalId: string;
     completed: boolean;
-    date: string; // ISO date format (YYYY-MM-DD)
+    date?: string; // ISO date format (YYYY-MM-DD) - optional for unscheduled tasks
 }
 
 export interface AppData {

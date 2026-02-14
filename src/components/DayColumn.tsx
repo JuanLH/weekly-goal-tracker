@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Task, Goal } from '../types';
 import { TaskCard } from './TaskCard';
+import { formatDateISO } from '../utils/dateUtils';
 import './DayColumn.css';
 
 interface DayColumnProps {
@@ -27,6 +28,7 @@ export const DayColumn = ({
     const [newTaskText, setNewTaskText] = useState('');
     const [selectedGoalId, setSelectedGoalId] = useState('');
     const [showForm, setShowForm] = useState(false);
+    const [isDragOver, setIsDragOver] = useState(false);
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
@@ -43,10 +45,43 @@ export const DayColumn = ({
         }
     };
 
+    const handleDragOver = (e: React.DragEvent) => {
+        e.preventDefault();
+        e.dataTransfer.dropEffect = 'move';
+        setIsDragOver(true);
+    };
+
+    const handleDragLeave = () => {
+        setIsDragOver(false);
+    };
+
+    const handleDrop = (e: React.DragEvent) => {
+        e.preventDefault();
+        setIsDragOver(false);
+
+        try {
+            const taskData = JSON.parse(e.dataTransfer.getData('application/json')) as Task;
+            const newDate = formatDateISO(date);
+
+            // Update the task with the new date
+            onEditTask({
+                ...taskData,
+                date: newDate,
+            });
+        } catch (error) {
+            console.error('Error dropping task:', error);
+        }
+    };
+
     const isToday = new Date().toDateString() === date.toDateString();
 
     return (
-        <div className={`day-column ${isToday ? 'today' : ''}`}>
+        <div
+            className={`day-column ${isToday ? 'today' : ''} ${isDragOver ? 'drag-over' : ''}`}
+            onDragOver={handleDragOver}
+            onDragLeave={handleDragLeave}
+            onDrop={handleDrop}
+        >
             <div className="day-header">
                 <h3 className="day-name">{dayName}</h3>
                 <span className="day-date">{date.getDate()}</span>
@@ -86,7 +121,7 @@ export const DayColumn = ({
 
             <div className="tasks-list">
                 {tasks.length === 0 ? (
-                    <p className="no-tasks">No tasks</p>
+                    <p className="no-tasks">{isDragOver ? 'Drop here' : 'No tasks'}</p>
                 ) : (
                     tasks.map(task => (
                         <TaskCard

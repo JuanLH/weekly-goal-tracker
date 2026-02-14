@@ -34,8 +34,17 @@ export const TaskCard = ({ task, goals, onEdit, onDelete, onToggleComplete }: Ta
         setIsEditing(false);
     };
 
+    const handleDragStart = (e: React.DragEvent) => {
+        e.dataTransfer.effectAllowed = 'move';
+        e.dataTransfer.setData('application/json', JSON.stringify(task));
+    };
+
     return (
-        <div className={`task-card ${task.completed ? 'completed' : ''}`}>
+        <div
+            className={`task-card ${task.completed ? 'completed' : ''}`}
+            draggable={!isEditing}
+            onDragStart={handleDragStart}
+        >
             {isEditing ? (
                 <div className="task-edit-mode">
                     <textarea
