@@ -37,7 +37,7 @@ export const DayColumn = ({
                 text: newTaskText.trim(),
                 goalId: selectedGoalId,
                 completed: false,
-                date: date.toISOString().split('T')[0],
+                date: formatDateISO(date),
             });
             setNewTaskText('');
             setSelectedGoalId('');
