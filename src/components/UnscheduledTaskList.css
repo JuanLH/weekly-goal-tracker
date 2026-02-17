@@ -167,3 +167,10 @@
     color: #4caf50;
     font-weight: 600;
 }
+
+/* Desktop: Always show add button in sidebar */
+@media (min-width: 1200px) {
+    .unscheduled-task-list .add-task-btn {
+        display: block !important;
+    }
+}

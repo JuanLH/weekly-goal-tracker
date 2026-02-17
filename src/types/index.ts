@@ -3,6 +3,7 @@ export interface Goal {
     title: string;
     description?: string;
     createdDate: string;
+    deadline?: string; // ISO date format (YYYY-MM-DD)
 }
 
 export interface Task {

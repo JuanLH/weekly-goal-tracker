@@ -14,6 +14,7 @@ interface GoalsPanelProps {
 export const GoalsPanel = ({ goals, tasks, onAddGoal, onEditGoal, onDeleteGoal }: GoalsPanelProps) => {
     const [newTitle, setNewTitle] = useState('');
     const [newDescription, setNewDescription] = useState('');
+    const [newDeadline, setNewDeadline] = useState('');
     const [showForm, setShowForm] = useState(false);
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -22,9 +23,11 @@ export const GoalsPanel = ({ goals, tasks, onAddGoal, onEditGoal, onDeleteGoal }
             onAddGoal({
                 title: newTitle.trim(),
                 description: newDescription.trim() || undefined,
+                deadline: newDeadline || undefined,
             });
             setNewTitle('');
             setNewDescription('');
+            setNewDeadline('');
             setShowForm(false);
         }
     };
@@ -63,6 +66,13 @@ export const GoalsPanel = ({ goals, tasks, onAddGoal, onEditGoal, onDeleteGoal }
                         placeholder="Description (optional)"
                         className="goal-textarea"
                         rows={3}
+                    />
+                    <input
+                        type="date"
+                        value={newDeadline}
+                        onChange={(e) => setNewDeadline(e.target.value)}
+                        className="goal-date-input"
+                        placeholder="Deadline (optional)"
                     />
                     <button type="submit" className="submit-btn">Add Goal</button>
                 </form>

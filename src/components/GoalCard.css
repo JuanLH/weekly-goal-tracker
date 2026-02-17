@@ -89,11 +89,76 @@
     margin-top: 12px;
     padding-top: 12px;
     border-top: 1px solid #e0e0e0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
 }
 
 .goal-date {
     font-size: 0.875rem;
     color: #999;
+}
+
+.goal-deadline {
+    font-size: 0.875rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.goal-deadline.completed {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+}
+
+.goal-deadline.overdue {
+    background-color: #ffebee;
+    color: #c62828;
+}
+
+.goal-deadline.today {
+    background-color: #fff3e0;
+    color: #e65100;
+    animation: pulse 2s infinite;
+}
+
+.goal-deadline.upcoming {
+    background-color: #fff9c4;
+    color: #f57c00;
+}
+
+.goal-deadline.future {
+    background-color: #e3f2fd;
+    color: #1565c0;
+}
+
+@keyframes pulse {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.7;
+    }
+}
+
+.goal-date-input {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #667eea;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.goal-date-input:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
 }
 
 /* Edit Mode */
