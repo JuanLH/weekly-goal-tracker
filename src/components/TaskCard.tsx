@@ -1,5 +1,7 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import type { Task, Goal } from '../types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEllipsisVertical, faPen, faTrash, faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import './TaskCard.css';
 
 interface TaskCardProps {
@@ -14,8 +16,22 @@ export const TaskCard = ({ task, goals, onEdit, onDelete, onToggleComplete }: Ta
     const [isEditing, setIsEditing] = useState(false);
     const [editText, setEditText] = useState(task.text);
     const [editGoalId, setEditGoalId] = useState(task.goalId);
+    const [menuOpen, setMenuOpen] = useState(false);
+    const menuRef = useRef<HTMLDivElement>(null);
 
     const goal = goals.find(g => g.id === task.goalId);
+
+    useEffect(() => {
+        const handleClickOutside = (e: MouseEvent) => {
+            if (menuRef.current && !menuRef.current.contains(e.target as Node)) {
+                setMenuOpen(false);
+            }
+        };
+        if (menuOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, [menuOpen]);
 
     const handleSave = () => {
         if (editText.trim() && editGoalId) {
@@ -37,6 +53,16 @@ export const TaskCard = ({ task, goals, onEdit, onDelete, onToggleComplete }: Ta
     const handleDragStart = (e: React.DragEvent) => {
         e.dataTransfer.effectAllowed = 'move';
         e.dataTransfer.setData('application/json', JSON.stringify(task));
+    };
+
+    const handleEditClick = () => {
+        setMenuOpen(false);
+        setIsEditing(true);
+    };
+
+    const handleDeleteClick = () => {
+        setMenuOpen(false);
+        onDelete(task.id);
     };
 
     return (
@@ -66,8 +92,12 @@ export const TaskCard = ({ task, goals, onEdit, onDelete, onToggleComplete }: Ta
                         ))}
                     </select>
                     <div className="task-edit-actions">
-                        <button onClick={handleSave} className="save-btn">✓</button>
-                        <button onClick={handleCancel} className="cancel-btn">✕</button>
+                        <button onClick={handleSave} className="save-btn">
+                            <FontAwesomeIcon icon={faCheck} />
+                        </button>
+                        <button onClick={handleCancel} className="cancel-btn">
+                            <FontAwesomeIcon icon={faXmark} />
+                        </button>
                     </div>
                 </div>
             ) : (
@@ -84,13 +114,25 @@ export const TaskCard = ({ task, goals, onEdit, onDelete, onToggleComplete }: Ta
                             {goal && <span className="task-goal-label">{goal.title}</span>}
                         </div>
                     </div>
-                    <div className="task-actions no-print">
-                        <button onClick={() => setIsEditing(true)} className="edit-btn" title="Edit task">
-                            ✏️
+
+                    <div className="task-menu no-print" ref={menuRef}>
+                        <button
+                            className="task-menu-btn"
+                            onClick={() => setMenuOpen(prev => !prev)}
+                            title="Task actions"
+                        >
+                            <FontAwesomeIcon icon={faEllipsisVertical} />
                         </button>
-                        <button onClick={() => onDelete(task.id)} className="delete-btn" title="Delete task">
-                            🗑️
-                        </button>
+                        {menuOpen && (
+                            <div className="task-menu-dropdown">
+                                <button onClick={handleEditClick} className="menu-item edit-item">
+                                    <FontAwesomeIcon icon={faPen} /> Edit
+                                </button>
+                                <button onClick={handleDeleteClick} className="menu-item delete-item">
+                                    <FontAwesomeIcon icon={faTrash} /> Delete
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </>
             )}

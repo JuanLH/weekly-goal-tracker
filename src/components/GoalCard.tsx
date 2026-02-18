@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import type { Goal } from '../types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen, faTrash, faCheck, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import './GoalCard.css';
 
 interface GoalCardProps {
@@ -82,8 +84,12 @@ export const GoalCard = ({ goal, onEdit, onDelete, completedTasks, totalTasks }:
                         placeholder="Deadline (optional)"
                     />
                     <div className="goal-edit-actions">
-                        <button onClick={handleSave} className="save-btn">✓ Save</button>
-                        <button onClick={handleCancel} className="cancel-btn">✕ Cancel</button>
+                        <button onClick={handleSave} className="save-btn">
+                            <FontAwesomeIcon icon={faCheck} /> Save
+                        </button>
+                        <button onClick={handleCancel} className="cancel-btn">
+                            <FontAwesomeIcon icon={faTrash} /> Cancel
+                        </button>
                     </div>
                 </div>
             ) : (
@@ -92,10 +98,10 @@ export const GoalCard = ({ goal, onEdit, onDelete, completedTasks, totalTasks }:
                         <h3 className="goal-title">{goal.title}</h3>
                         <div className="goal-actions no-print">
                             <button onClick={() => setIsEditing(true)} className="edit-btn" title="Edit goal">
-                                ✏️
+                                <FontAwesomeIcon icon={faPen} />
                             </button>
                             <button onClick={() => onDelete(goal.id)} className="delete-btn" title="Delete goal">
-                                🗑️
+                                <FontAwesomeIcon icon={faTrash} />
                             </button>
                         </div>
                     </div>
@@ -117,8 +123,8 @@ export const GoalCard = ({ goal, onEdit, onDelete, completedTasks, totalTasks }:
                         <span className="goal-date">Created: {new Date(goal.createdDate).toLocaleDateString()}</span>
                         {deadlineStatus && (
                             <span className={`goal-deadline ${deadlineStatus.status}`}>
-                                {deadlineStatus.status === 'completed' && '✓ '}
-                                {deadlineStatus.status === 'overdue' && '⚠️ '}
+                                {deadlineStatus.status === 'completed' && <FontAwesomeIcon icon={faCheck} />}{' '}
+                                {deadlineStatus.status === 'overdue' && <FontAwesomeIcon icon={faTriangleExclamation} />}{' '}
                                 {deadlineStatus.text}
                             </span>
                         )}

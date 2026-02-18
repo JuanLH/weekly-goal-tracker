@@ -40,7 +40,8 @@
     font-size: 1.1rem;
     padding: 4px 8px;
     border-radius: 4px;
-    transition: background-color 0.2s, transform 0.2s;
+    color: var(--text-secondary);
+    transition: background-color 0.2s, transform 0.2s, color 0.2s;
 }
 
 .edit-btn:hover {

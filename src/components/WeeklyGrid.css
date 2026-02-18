@@ -23,12 +23,12 @@
 @media print {
     .weekly-grid {
         grid-template-columns: repeat(2, 1fr);
-        gap: 12px;
+        gap: 6px;
         page-break-inside: avoid;
     }
 
     @page {
         size: portrait;
-        margin: 0.5in;
+        margin: 0.3in;
     }
 }

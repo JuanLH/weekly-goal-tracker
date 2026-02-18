@@ -5,7 +5,7 @@
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
-    min-height: 400px;
+    height: 100%;
     border-top: 4px solid #e0e0e0;
     transition: border-color 0.3s;
 }
@@ -123,6 +123,7 @@
     flex-direction: column;
     gap: 8px;
     flex: 1;
+    overflow-y: auto;
 }
 
 .no-tasks {
@@ -140,6 +141,7 @@
         border: 1px solid #ddd;
         page-break-inside: avoid;
         min-height: auto;
+        padding: 6px;
     }
 
     .day-column.today {
@@ -152,12 +154,23 @@
     }
 
     .day-header {
-        border-bottom: 2px solid #333;
+        border-bottom: 1px solid #333;
+        margin-bottom: 6px;
+        padding-bottom: 4px;
     }
 
-    .day-name,
+    .day-name {
+        color: #333;
+        font-size: 0.95rem;
+    }
+
     .day-date {
         color: #333;
+        font-size: 1.2rem;
+    }
+
+    .tasks-list {
+        gap: 2px;
     }
 }
 

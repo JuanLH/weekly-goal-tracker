@@ -2,6 +2,8 @@ import { useState } from 'react';
 import type { Task, Goal } from '../types';
 import { TaskCard } from './TaskCard';
 import { formatDateISO } from '../utils/dateUtils';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import './DayColumn.css';
 
 interface DayColumnProps {
@@ -62,8 +64,6 @@ export const DayColumn = ({
         try {
             const taskData = JSON.parse(e.dataTransfer.getData('application/json')) as Task;
             const newDate = formatDateISO(date);
-
-            // Update the task with the new date
             onEditTask({
                 ...taskData,
                 date: newDate,
@@ -91,7 +91,7 @@ export const DayColumn = ({
                 onClick={() => setShowForm(!showForm)}
                 className="add-task-btn no-print"
             >
-                {showForm ? '✕' : '+'}
+                <FontAwesomeIcon icon={showForm ? faXmark : faPlus} />
             </button>
 
             {showForm && (

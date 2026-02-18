@@ -68,31 +68,65 @@
     max-width: fit-content;
 }
 
-.task-actions {
-    display: flex;
-    gap: 4px;
+.task-menu {
+    position: relative;
     flex-shrink: 0;
 }
 
-.task-actions .edit-btn,
-.task-actions .delete-btn {
+.task-menu-btn {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: 1rem;
-    padding: 4px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-secondary);
+    padding: 2px 6px;
     border-radius: 4px;
-    transition: background-color 0.2s, transform 0.2s;
+    line-height: 1;
+    letter-spacing: 1px;
+    transition: background-color 0.2s, color 0.2s;
 }
 
-.task-actions .edit-btn:hover {
+.task-menu-btn:hover {
     background-color: rgba(102, 126, 234, 0.1);
-    transform: scale(1.1);
+    color: var(--primary-color);
 }
 
-.task-actions .delete-btn:hover {
-    background-color: rgba(244, 67, 54, 0.1);
-    transform: scale(1.1);
+.task-menu-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    min-width: 110px;
+    overflow: hidden;
+}
+
+.menu-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    width: 100%;
+    padding: 8px 12px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 0.9rem;
+    text-align: left;
+    transition: background-color 0.15s;
+    color: var(--text-primary);
+}
+
+.menu-item:hover {
+    background-color: var(--bg-primary);
+}
+
+.menu-item.delete-item:hover {
+    background-color: rgba(244, 67, 54, 0.08);
+    color: #f44336;
 }
 
 /* Edit Mode */
@@ -185,17 +219,35 @@
 @media print {
     .task-card {
         box-shadow: none;
-        border: 1px solid #ddd;
+        border: none;
+        border-left: none;
         page-break-inside: avoid;
-        margin-bottom: 8px;
+        margin-bottom: 0;
+        padding: 4px 6px;
     }
 
-    .task-actions {
+    .task-menu {
+        display: none;
+    }
+
+    .task-checkbox {
         display: none;
     }
 
     .task-goal-label {
-        background: none;
-        border: 1px solid #667eea;
+        display: none;
+    }
+
+    .task-content {
+        gap: 0;
+    }
+
+    .task-info {
+        gap: 0;
+    }
+
+    .task-text {
+        font-size: 1rem;
+        line-height: 1.3;
     }
 }

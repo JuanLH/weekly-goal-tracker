@@ -2,6 +2,8 @@ import type { Task, Goal } from '../types';
 import { WeeklyGrid } from '../components/WeeklyGrid';
 import { UnscheduledTaskList } from '../components/UnscheduledTaskList';
 import { getNextWeek, getPreviousWeek, formatDateShort } from '../utils/dateUtils';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPrint, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
 import './WeeklyPlannerPage.css';
 
 interface WeeklyPlannerPageProps {
@@ -66,13 +68,13 @@ export const WeeklyPlannerPage = ({
                 </h1>
 
                 <button onClick={onPrintPlanner} className="print-btn no-print">
-                    🖨️ Print Planner
+                    <FontAwesomeIcon icon={faPrint} /> Print Planner
                 </button>
             </div>
 
             {goals.length === 0 ? (
                 <div className="no-goals-warning">
-                    <p>⚠️ Please add at least one yearly goal before creating tasks.</p>
+                    <p><FontAwesomeIcon icon={faTriangleExclamation} /> Please add at least one yearly goal before creating tasks.</p>
                 </div>
             ) : (
                 <div className="planner-content">

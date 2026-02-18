@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import type { Goal, Task } from '../types';
 import { GoalCard } from './GoalCard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faXmark } from '@fortawesome/free-solid-svg-icons';
 import './GoalsPanel.css';
 
 interface GoalsPanelProps {
@@ -46,7 +48,10 @@ export const GoalsPanel = ({ goals, tasks, onAddGoal, onEditGoal, onDeleteGoal }
                     onClick={() => setShowForm(!showForm)}
                     className="add-goal-btn no-print"
                 >
-                    {showForm ? '✕ Cancel' : '+ Add Goal'}
+                    {showForm
+                        ? <><FontAwesomeIcon icon={faXmark} /> Cancel</>
+                        : <><FontAwesomeIcon icon={faPlus} /> Add Goal</>
+                    }
                 </button>
             </div>
 

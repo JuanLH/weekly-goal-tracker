@@ -1,6 +1,8 @@
 import type { Task, Goal } from '../types';
 import { TaskCard } from './TaskCard';
 import { useState } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faClipboardList, faPlus, faCircleDown, faCheck, faXmark } from '@fortawesome/free-solid-svg-icons';
 import './UnscheduledTaskList.css';
 
 interface UnscheduledTaskListProps {
@@ -91,21 +93,21 @@ export const UnscheduledTaskList = ({
             onDrop={handleDrop}
         >
             <div className="sidebar-header">
-                <h2>📋 Task Backlog</h2>
+                <h2><FontAwesomeIcon icon={faClipboardList} /> Task Backlog</h2>
                 <button onClick={handleAddClick} className="add-task-btn" title="Add unscheduled task">
-                    + Add
+                    <FontAwesomeIcon icon={faPlus} /> Add
                 </button>
             </div>
 
             <div className="sidebar-description">
-                <p>{isDragOver ? '🎯 Drop task here to unschedule' : 'Tasks waiting to be scheduled'}</p>
+                <p>{isDragOver ? <><FontAwesomeIcon icon={faCircleDown} /> Drop task here to unschedule</> : 'Tasks waiting to be scheduled'}</p>
             </div>
 
             <div className="unscheduled-tasks">
                 {tasks.length === 0 && !isAddingTask && (
                     <div className="empty-state">
                         <p>{isDragOver ? 'Drop task here' : 'No unscheduled tasks'}</p>
-                        {!isDragOver && <p className="hint">Click "+ Add" to create a task</p>}
+                        {!isDragOver && <p className="hint">Click "Add" to create a task</p>}
                     </div>
                 )}
 
@@ -131,10 +133,10 @@ export const UnscheduledTaskList = ({
                         />
                         <div className="form-actions">
                             <button onClick={handleSaveTask} className="save-btn">
-                                Save
+                                <FontAwesomeIcon icon={faCheck} /> Save
                             </button>
                             <button onClick={handleCancel} className="cancel-btn">
-                                Cancel
+                                <FontAwesomeIcon icon={faXmark} /> Cancel
                             </button>
                         </div>
                     </div>

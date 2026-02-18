@@ -2,6 +2,11 @@ import { useRef } from 'react';
 import type { ViewMode, ThemeMode } from '../types';
 import { exportService } from '../utils/exportService';
 import type { AppData } from '../types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+    faClipboardList, faFlag, faCalendarWeek,
+    faFileExport, faFileImport, faMoon, faSun
+} from '@fortawesome/free-solid-svg-icons';
 import './Navigation.css';
 
 interface NavigationProps {
@@ -37,7 +42,6 @@ export const Navigation = ({
             } catch (error) {
                 alert('Failed to import data. Please check the file format.');
             }
-            // Reset input
             if (fileInputRef.current) {
                 fileInputRef.current.value = '';
             }
@@ -47,7 +51,7 @@ export const Navigation = ({
     return (
         <nav className="navigation">
             <div className="nav-brand">
-                <h1>📋 Weekly Goal Tracker</h1>
+                <h1><FontAwesomeIcon icon={faClipboardList} /> Weekly Goal Tracker</h1>
             </div>
 
             <div className="nav-tabs">
@@ -55,25 +59,25 @@ export const Navigation = ({
                     className={`nav-tab ${currentView === 'goals' ? 'active' : ''}`}
                     onClick={() => onViewChange('goals')}
                 >
-                    🎯 Goals
+                    <FontAwesomeIcon icon={faFlag} /> Goals
                 </button>
                 <button
                     className={`nav-tab ${currentView === 'planner' ? 'active' : ''}`}
                     onClick={() => onViewChange('planner')}
                 >
-                    📅 Weekly Planner
+                    <FontAwesomeIcon icon={faCalendarWeek} /> Weekly Planner
                 </button>
             </div>
 
             <div className="nav-actions">
                 <button onClick={onExport} className="action-btn export-btn" title="Export data">
-                    📥 Export
+                    <FontAwesomeIcon icon={faFileExport} /> Export
                 </button>
                 <button onClick={handleImportClick} className="action-btn import-btn" title="Import data">
-                    📤 Import
+                    <FontAwesomeIcon icon={faFileImport} /> Import
                 </button>
                 <button onClick={onThemeToggle} className="action-btn theme-btn" title="Toggle theme">
-                    {theme === 'light' ? '🌙' : '☀️'}
+                    <FontAwesomeIcon icon={theme === 'light' ? faMoon : faSun} />
                 </button>
                 <input
                     ref={fileInputRef}
